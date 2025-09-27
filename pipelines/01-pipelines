@@ -1,0 +1,35 @@
+pipeline {
+    agent {label 'linux'}
+
+    options {
+        timeout(time:30, unit: 'MINUTES')  //定义整个流水线的运行超时时间，超过30分钟自动失败
+        buildDiscarder(logRotator(numToKeepStr: '10')) //保留最近10次的构建记录，避免日志和存档太多
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checkout'
+                sh 'printenv'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building..."
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Testing..."
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying..."
+            }
+        }
+    }
+}
